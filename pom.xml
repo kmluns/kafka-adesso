@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.pavza</groupId>
+    <artifactId>pavza-management</artifactId>
+    <version>0.3.0</version>
+    <packaging>jar</packaging>
+
+    <name>Asset Management</name>
+    <description>Asset Management Project</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.6.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-scratchpad</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+            <version>2.3.7.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+            <version>5.2.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+            <version>5.2.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.10.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.10.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <activatedProperties>dev</activatedProperties>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <activatedProperties>prod</activatedProperties>
+                <frontend.dir>${project.basedir}/../help_desk_frontend</frontend.dir>
+            </properties>
+
+
+            <build>
+                <plugins>
+<!--                    <plugin>-->
+<!--                        <groupId>org.codehaus.mojo</groupId>-->
+<!--                        <artifactId>exec-maven-plugin</artifactId>-->
+<!--                        <version>1.6.0</version>-->
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <id>npm-install</id>-->
+
+<!--                                <goals>-->
+<!--                                    <goal>exec</goal>-->
+<!--                                </goals>-->
+
+<!--                                <phase>prepare-package</phase>-->
+
+<!--                                <configuration>-->
+<!--                                    <executable>npm</executable>-->
+<!--                                    <arguments>-->
+<!--                                        <argument>install</argument>-->
+<!--                                        <argument>&#45;&#45;no-audit</argument>-->
+<!--                                    </arguments>-->
+<!--                                    <workingDirectory>${frontend.dir}</workingDirectory>-->
+<!--                                </configuration>-->
+
+<!--                            </execution>-->
+<!--                            &lt;!&ndash;<execution>&ndash;&gt;-->
+<!--                            &lt;!&ndash;<id>npm-test</id>&ndash;&gt;-->
+
+<!--                            &lt;!&ndash;<goals>&ndash;&gt;-->
+<!--                            &lt;!&ndash;<goal>exec</goal>&ndash;&gt;-->
+<!--                            &lt;!&ndash;</goals>&ndash;&gt;-->
+
+<!--                            &lt;!&ndash;<phase>prepare-package</phase>&ndash;&gt;-->
+
+<!--                            &lt;!&ndash;<configuration>&ndash;&gt;-->
+<!--                            &lt;!&ndash;<executable>npm</executable>&ndash;&gt;-->
+<!--                            &lt;!&ndash;<arguments>&ndash;&gt;-->
+<!--                            &lt;!&ndash;<argument>test</argument>&ndash;&gt;-->
+<!--                            &lt;!&ndash;<argument>&#45;&#45;</argument>&ndash;&gt;-->
+<!--                            &lt;!&ndash;<argument>&#45;&#45;watchAll=false</argument>&ndash;&gt;-->
+<!--                            &lt;!&ndash;</arguments>&ndash;&gt;-->
+<!--                            &lt;!&ndash;<workingDirectory>${frontend.dir}</workingDirectory>&ndash;&gt;-->
+<!--                            &lt;!&ndash;<environmentVariables>&ndash;&gt;-->
+<!--                            &lt;!&ndash;<CI>true</CI>&ndash;&gt;-->
+<!--                            &lt;!&ndash;</environmentVariables>&ndash;&gt;-->
+<!--                            &lt;!&ndash;</configuration>&ndash;&gt;-->
+
+<!--                            &lt;!&ndash;</execution>&ndash;&gt;-->
+<!--                            <execution>-->
+<!--                                <id>npm-run-build</id>-->
+
+<!--                                <goals>-->
+<!--                                    <goal>exec</goal>-->
+<!--                                </goals>-->
+
+<!--                                <phase>prepare-package</phase>-->
+
+<!--                                <configuration>-->
+<!--                                    <executable>npm</executable>-->
+<!--                                    <arguments>-->
+<!--                                        <argument>run</argument>-->
+<!--                                        <argument>build</argument>-->
+<!--                                    </arguments>-->
+<!--                                    <workingDirectory>${frontend.dir}</workingDirectory>-->
+<!--                                </configuration>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                    </plugin>-->
+
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-resources-plugin</artifactId>-->
+<!--                        <version>3.1.0</version>-->
+
+<!--                        <executions>-->
+<!--                            <execution>-->
+<!--                                <id>copy-react-build</id>-->
+<!--                                <goals>-->
+<!--                                    <goal>copy-resources</goal>-->
+<!--                                </goals>-->
+<!--                                <phase>prepare-package</phase>-->
+<!--                                <configuration>-->
+<!--                                    <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>-->
+<!--                                    <resources>-->
+<!--                                        <resource>-->
+<!--                                            <directory>${frontend.dir}/build</directory>-->
+<!--                                            <filtering>false</filtering>-->
+<!--                                        </resource>-->
+<!--                                    </resources>-->
+<!--                                </configuration>-->
+<!--                            </execution>-->
+<!--                        </executions>-->
+<!--                    </plugin>-->
+
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+
+                        <configuration>
+                            <profiles>
+                                <profile>prod</profile>
+                            </profiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
+
+        </profile>
+
+        <profile>
+            <id>local-server</id>
+            <properties>
+                <activatedProperties>local-server</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
